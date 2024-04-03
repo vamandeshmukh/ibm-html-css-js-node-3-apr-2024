@@ -9,3 +9,46 @@ h1 {
 .common-style {
     color: brown;
 }
+
+/* Descendant Selectors */
+
+div p {
+    color: chartreuse;
+}
+
+/* Grouping Selectors  */
+
+h2,
+h3,
+h4 {
+    color: aqua;
+}
+
+
+/* CSS Positioning */
+
+.ibm-position {
+    /* position: absolute; */
+    position: relative;
+    top: 50px;
+    left: 50px;
+    bottom: 50px;
+}
+
+/* CSS Specificity */
+
+.ibm-color {
+    color: beige;
+}
+
+.ibm-color-2 {
+    color: aqua !important;
+}
+
+
+/* 
+Descendant Selectors
+Grouping Selectors 
+CSS Positioning
+CSS Specificity
+*/
