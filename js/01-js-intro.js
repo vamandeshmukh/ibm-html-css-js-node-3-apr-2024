@@ -116,12 +116,13 @@ const empData = {
     phones: [1111, 2222],
     isIndian: true,
     address: { city: 'Pune', pin: 222222 },
-    printData: () => { }
+    printData: function () { 
+        console.log(this);
+    }
 };
 
-
 // console.log(empData);
-
+// empData.printData();
 console.log(empData.address.city);
 
 
