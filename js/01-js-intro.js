@@ -63,8 +63,23 @@ console.log('Datatypes in JS');
 // console.log(myValue);
 // console.log(typeof (myValue)); 
 
+// const num2 = 20;
+// console.log(num2);
+// num2 = 25;
+// console.log(num2);
 
-const num2 = 20;
-console.log(num2);
-num2 = 'abc';
-console.log(num2);
+
+
+// let myValue;
+// console.log(myValue);
+// console.log(typeof (myValue));
+
+let v1 = 10;
+let v2 = 20;
+console.log(v1 + v2);
+
+let v3 = 10;
+let v4 = 'abc';
+console.log(v3 + v4);
+console.log(v3 - v4);
+
