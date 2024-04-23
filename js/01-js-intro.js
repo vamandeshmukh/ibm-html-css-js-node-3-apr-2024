@@ -74,12 +74,65 @@ console.log('Datatypes in JS');
 // console.log(myValue);
 // console.log(typeof (myValue));
 
-let v1 = 10;
-let v2 = 20;
-console.log(v1 + v2);
+// let v1 = 10;
+// let v2 = 20;
+// console.log(v1 + v2);
 
-let v3 = 10;
-let v4 = 'abc';
-console.log(v3 + v4);
-console.log(v3 - v4);
+// let v3 = 10;
+// let v4 = 'abc';
+// console.log(v3 + v4);
+// console.log(v3 - v4);
+
+
+// = 
+
+// ==
+
+// === 
+
+// !== 
+
+// truthy 
+// falsy 
+
+
+// false, NaN, undefiled, 0, '' 
+
+// if (fname) {
+
+// }
+
+// let x = false;
+// let y = 
+
+// const myArray = [10, 20, 30];
+
+// const myArray = [10, 20.25, false, 'abc', ['a', 2, true], 23];
+
+const empData = {
+    eid: 101,
+    firstName: 'Sonu',
+    salary: 10.25,
+    phones: [1111, 2222],
+    isIndian: true,
+    address: { city: 'Pune', pin: 222222 },
+    printData: () => { }
+};
+
+
+// console.log(empData);
+
+console.log(empData.address.city);
+
+
+
+
+
+
+
+
+
+
+
+
 
