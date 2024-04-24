@@ -42,24 +42,67 @@
 //     return new Promise((resolve, reject) => { });
 // };
 
-const getMessage = () => {
-    return new Promise((resolve, reject) => {
-        const isDataAvailable = false; // true, false 
-        setTimeout(() => {
-            if (isDataAvailable)
-                resolve({ message: 'Have fun!' });
-            else
-                reject({ message: 'Data not available!' })
-        }, 2000);
-    });
-};
+// const getMessage = () => {
+//     return new Promise((resolve, reject) => {
+//         const isDataAvailable = false; // true, false 
+//         setTimeout(() => {
+//             if (isDataAvailable)
+//                 resolve({ message: 'Have fun!' });
+//             else
+//                 reject({ message: 'Data not available!' })
+//         }, 2000);
+//     });
+// };
 
 // getMessage()
 //     .then(() => {}) // success 
 //     .catch(() => {}); // error 
 
-getMessage()
-    .then((response) => { console.log(response.message); })
-    .catch((error) => { console.log(error); });
+// getMessage()
+//     .then(() => {}) // success 
+//     .then(() => {}) // success 
+//     .catch(() => {}); // error 
+
+// getMessage()
+//     .then((response) => { console.log(response.message); })
+//     .catch((error) => { console.log(error.message); });
+
+
+// solution 3 - async await 
+// ------------------------
+
+const getMessage = () => {
+    return new Promise((resolve, reject) => {
+        const isDataAvailable = true; // true, false 
+        setTimeout(() => {
+            if (isDataAvailable)
+                resolve({ message: 'Have fun!' });
+            else
+                reject({ message: 'Data not available!' });
+        }, 2000);
+    });
+};
+
+const printData = async () => {
+    try {
+        const output = await getMessage();
+        console.log(output.message);
+    } catch (error) {
+        console.log(error.message);
+    }
+};
+
+printData();
+
+
+
+
+
+
+
+
+
+
+
 
 
