@@ -28,10 +28,10 @@ const springBootUrlPost = 'http://localhost:8090/emp/add-emp';
 //     .catch(err => console.log(err));
 
 const empDataToAdd = {
-    firstName: 'Vinu',
-    email: 'vinu@gmail.com',
-    aadhaar: 787878787878,
-    salary: 78900
+    firstName: 'Dinu',
+    email: 'dinu@gmail.com',
+    aadhaar: 222222222222,
+    salary: 2222
 };
 
 fetch(springBootUrlPost, {
