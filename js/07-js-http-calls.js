@@ -14,8 +14,35 @@ const url = 'https://jsonplaceholder.typicode.com/users/2';
 //     })
 //     .catch((error) => { console.log(error); });
 
+// fetch(url)
+//     .then(res => res.json())
+//     .then(resp => console.log(resp))
+//     .catch(err => console.log(err));
 
-fetch(url)
+const springBootUrl = 'http://localhost:8090/emp/get-all-emps';
+const springBootUrlPost = 'http://localhost:8090/emp/add-emp';
+
+// fetch(springBootUrl)
+//     .then(res => res.json())
+//     .then(resp => console.log(resp))
+//     .catch(err => console.log(err));
+
+const empDataToAdd = {
+    firstName: 'Vinu',
+    email: 'vinu@gmail.com',
+    aadhaar: 787878787878,
+    salary: 78900
+};
+
+fetch(springBootUrlPost, {
+    method: 'POST',
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify(empDataToAdd)
+})
     .then(res => res.json())
     .then(resp => console.log(resp))
     .catch(err => console.log(err));
+
+
