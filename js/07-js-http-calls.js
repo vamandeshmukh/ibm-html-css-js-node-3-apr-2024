@@ -11,7 +11,7 @@ const url = 'https://jsonplaceholder.typicode.com/users/2';
 fetch(url)
     .then((res) => {
         console.log(res);
-        res.json;
+        return res.json();
     }).then((resp) => {
         console.log(resp);
     })
