@@ -8,11 +8,11 @@ const contentToWrite = {
     "salary": 20.25
 }
 
-fs.writeFile(dataFile2, JSON.stringify(contentToWrite), 'utf8', (err, data) => {
+fs.writeFile(dataFile2, JSON.stringify(contentToWrite), 'utf8', (err) => {
     if (err)
         console.log(err);
     else
-        console.log(`${data} written successfully!`);
+        console.log(`File written successfully!`);
 
 });
 
