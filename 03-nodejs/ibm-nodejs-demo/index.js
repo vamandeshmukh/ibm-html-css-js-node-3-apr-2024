@@ -15,7 +15,7 @@ else {
     console.log('running on default port number')
 }
 
-// const port = process.argv ? process.argv.slice(0).find(arg => arg.startsWith('port=')) : 3000;
+// const port = process.argv ? process.argv.find(arg => arg.startsWith('port=')) : 3000;
 
 // app.listen( port, () => {});
 
