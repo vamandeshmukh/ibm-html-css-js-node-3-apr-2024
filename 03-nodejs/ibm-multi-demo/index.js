@@ -1,5 +1,4 @@
-
-const addNums = (a, b) => a + b;
+import {addNums } from './math.js';
 
 let sum = addNums(10, 20);
 
