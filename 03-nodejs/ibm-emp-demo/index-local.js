@@ -1,5 +1,6 @@
 import express from 'express';
 import fs from 'fs';
+
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -41,6 +42,7 @@ app.get('/', (req, res) => {
     console.log('Welcome');
     res.send('Welcome to IBM Employee Management System');
 });
+
 app.get('/employees', (req, res) => {
     res.json(employees);
 });
