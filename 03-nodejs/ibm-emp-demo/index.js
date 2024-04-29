@@ -86,8 +86,7 @@ app.post('/login', (req, res) => {
 // });
 
 app.post('/employees', upload.single('avatar'), async (req, res) => {
-    console.log(req.file);
-    console.log(req.body);
+
     try {
         const avatar = (req.file && req.file.filename) ? req.file.filename : null;
         const { name, email, aadhaar, salary } = req.body;
@@ -130,4 +129,5 @@ app.delete('/employees/:id', (req, res) => {
             res.status(500).json({ message: 'Failed to delete employee', error: err.message });
         });
 });
+
 
