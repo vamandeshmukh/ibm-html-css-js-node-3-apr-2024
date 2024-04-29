@@ -12,44 +12,42 @@ app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
 
-// app.get('/employees', async (req, res) => {
-//     try {
-//         const page = parseInt(req.query.page) || 1;
-//         const limit = parseInt(req.query.limit) || 10;
-//         const skip = (page - 1) * limit;
+// request in this way - 
+// http://localhost:3000/employees?page=1&limit=2&sortBy=aadhaar
 
-//         const sortField = req.query.sortBy || 'name';
-//         const sortOrder = req.query.sortOrder && req.query.sortOrder.toLowerCase() === 'desc' ? -1 : 1;
+app.get('/employees', async (req, res) => {
+    try {
+        const page = parseInt(req.query.page) || 1;
+        const limit = parseInt(req.query.limit) || 10;
+        const skip = (page - 1) * limit;
 
-//         console.log('Page:', page);
-//         console.log('Limit:', limit);
-//         console.log('Sort Field:', sortField);
-//         console.log('Sort Order:', sortOrder);
+        const sortField = req.query.sortBy || 'firstName';
+        const sortOrder = req.query.sortOrder && req.query.sortOrder.toLowerCase() === 'desc' ? -1 : 1;
 
-//         const employees = await Employee.find()
-//             .sort({ [sortField]: sortOrder })
-//             .skip(skip)
-//             .limit(limit);
+        const employees = await Employee.find()
+            .sort({ [sortField]: sortOrder })
+            .skip(skip)
+            .limit(limit);
 
-//         res.status(200).json(employees);
-//     } catch (err) {
-//         console.error('Error:', err);
-//         res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
-//     }
-// });
-
-app.get('/employees', (req, res) => {
-    Employee.find()
-        .sort({ [req.query.sortBy]: 'asc' })
-        .skip(req.query.page)
-        .limit(req.query.limit)
-        .then(employees => {
-            res.status(200).json(employees);
-        })
-        .catch(err => {
-            res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
-        });
+        res.status(200).json(employees);
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
+    }
 });
+
+// app.get('/employees', (req, res) => {
+//     Employee.find()
+//         .sort({ [req.query.sortBy]: 'asc' })
+//         .skip(req.query.page)
+//         .limit(req.query.limit)
+//         .then(employees => {
+//             res.status(200).json(employees);
+//         })
+//         .catch(err => {
+//             res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
+//         });
+// });
 
 
 
