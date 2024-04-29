@@ -1,11 +1,11 @@
 import express from 'express';
 import { authenticateJWT, generateToken } from './auth.js';
 import { Employee } from './db-con.js';
-import multer from 'multer';  //  
+import multer from 'multer'; // file upload 
 
 const app = express();
 const port = process.env.PORT || 3000;
-const upload = multer({ dest: 'uploads/' }); // 
+const upload = multer({ dest: 'uploads/' }); // // file upload 
 
 app.use(express.json());
 app.use(authenticateJWT);
@@ -85,11 +85,15 @@ app.post('/login', (req, res) => {
 //         });
 // });
 
+// upload image file 
 app.post('/employees', upload.single('avatar'), async (req, res) => {
-
     try {
+
+        // the uploaded file  
         const avatar = (req.file && req.file.filename) ? req.file.filename : null;
+
         const { name, email, aadhaar, salary } = req.body;
+
         const newEmployee = new Employee({ name, email, aadhaar, salary, avatar });
         await newEmployee.save();
         res.status(201).json({ message: 'Employee created successfully', employee: newEmployee });
