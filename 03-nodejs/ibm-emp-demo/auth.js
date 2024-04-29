@@ -3,18 +3,14 @@ import jwt from 'jsonwebtoken';
 const secretKey = 'vaman-secret';
 
 const authenticateJWT = (req, res, next) => {
+
+    if (req.path === '/login')
+        return next();
+
     const bearerToken = req.headers.authorization;
     let token = '';
-    if (bearerToken) {
-        token = bearerToken.split(" ")[1]; // ???
-        console.log(bearerToken); // REMOVE this line.
-        console.log(token); // REMOVE this line.
-        console.log(secretKey); // REMOVE this line.
-    }
-
-    if (req.path === '/login') {
-        return next();
-    }
+    if (bearerToken)
+        token = bearerToken.split(" ")[1];
 
     if (token) {
         jwt.verify(token, secretKey, (err, decoded) => {
@@ -22,7 +18,7 @@ const authenticateJWT = (req, res, next) => {
                 console.error('JWT verification error:', err);
                 return res.status(403).json({ message: 'Failed to authenticate token' });
             } else {
-                console.log('Decoded token:', decoded);
+                console.log(decoded);
                 req.user = decoded;
                 next();
             }
@@ -35,7 +31,6 @@ const authenticateJWT = (req, res, next) => {
 
 const generateToken = (user) => {
     const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
-    console.log(token); // REMOVE this line.
     return token;
 };
 

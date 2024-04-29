@@ -1,9 +1,11 @@
 import express from 'express';
 import { authenticateJWT, generateToken } from './auth.js';
 import { Employee } from './db-con.js';
+import multer from 'multer';  //  
 
 const app = express();
 const port = process.env.PORT || 3000;
+const upload = multer({ dest: 'uploads/' }); // 
 
 app.use(express.json());
 app.use(authenticateJWT);
@@ -14,6 +16,7 @@ app.listen(port, () => {
 
 // request in this way - 
 // http://localhost:3000/employees?page=1&limit=2&sortBy=aadhaar
+// http://localhost:3000/employees?page=1&limit=2&sortBy=firstName$sortOrder=desc
 
 app.get('/employees', async (req, res) => {
     try {
@@ -35,21 +38,6 @@ app.get('/employees', async (req, res) => {
         res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
     }
 });
-
-// app.get('/employees', (req, res) => {
-//     Employee.find()
-//         .sort({ [req.query.sortBy]: 'asc' })
-//         .skip(req.query.page)
-//         .limit(req.query.limit)
-//         .then(employees => {
-//             res.status(200).json(employees);
-//         })
-//         .catch(err => {
-//             res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
-//         });
-// });
-
-
 
 app.get('/employees/:id', (req, res) => {
     const employeeId = req.params.id;
@@ -86,15 +74,30 @@ app.post('/login', (req, res) => {
     }
 });
 
-app.post('/employees', (req, res) => {
-    const newEmployee = req.body;
-    Employee.create(newEmployee)
-        .then(employee => {
-            res.status(201).json({ message: 'Employee created successfully', employee });
-        })
-        .catch(err => {
-            res.status(500).json({ message: 'Failed to create employee', error: err.message });
-        });
+// app.post('/employees', (req, res) => {
+//     const newEmployee = req.body;
+//     Employee.create(newEmployee)
+//         .then(employee => {
+//             res.status(201).json({ message: 'Employee created successfully', employee });
+//         })
+//         .catch(err => {
+//             res.status(500).json({ message: 'Failed to create employee', error: err.message });
+//         });
+// });
+
+app.post('/employees', upload.single('avatar'), async (req, res) => {
+    console.log(req.file);
+    console.log(req.body);
+    try {
+        const avatar = (req.file && req.file.filename) ? req.file.filename : null;
+        const { name, email, aadhaar, salary } = req.body;
+        const newEmployee = new Employee({ name, email, aadhaar, salary, avatar });
+        await newEmployee.save();
+        res.status(201).json({ message: 'Employee created successfully', employee: newEmployee });
+    } catch (err) {
+        console.error('Error:', err);
+        res.status(500).json({ message: 'Failed to create employee', error: err.message });
+    }
 });
 
 app.put('/employees/:id', (req, res) => {

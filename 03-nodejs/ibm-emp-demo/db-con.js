@@ -8,8 +8,11 @@ mongoose.connect(`${connectionString}/${databaseName}`)
     .catch(err => console.error('Error connecting to MongoDB:', err));
 
 const employeeSchema = new mongoose.Schema({
-    name: String,
-    email: String
+    firstName: String,
+    email: String,
+    salary: Number,
+    aadhaar: Number,
+    avatar: String
 });
 
 const Employee = mongoose.model('Employee', employeeSchema);
