@@ -31,19 +31,34 @@ app.listen(port, () => {
 //             .skip(skip)
 //             .limit(limit);
 
-//         res.json(employees);
+//         res.status(200).json(employees);
 //     } catch (err) {
 //         console.error('Error:', err);
 //         res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
 //     }
 // });
 
+app.get('/employees', (req, res) => {
+    Employee.find()
+        .sort({ [req.query.sortBy]: 'asc' })
+        .skip(req.query.page)
+        .limit(req.query.limit)
+        .then(employees => {
+            res.status(200).json(employees);
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
+        });
+});
+
+
+
 app.get('/employees/:id', (req, res) => {
     const employeeId = req.params.id;
     Employee.findById(employeeId)
         .then(employee => {
             if (employee) {
-                res.json(employee);
+                res.status(200).json(employee);
             } else {
                 res.status(404).json({ message: 'Employee not found' });
             }
@@ -53,21 +68,21 @@ app.get('/employees/:id', (req, res) => {
         });
 });
 
-app.get('/employees', (req, res) => {
-    Employee.find()
-        .then(employees => {
-            res.json(employees);
-        })
-        .catch(err => {
-            res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
-        });
-});
+// app.get('/employees', (req, res) => {
+//     Employee.find()
+//         .then(employees => {
+//             res.status(200).json(employees);
+//         })
+//         .catch(err => {
+//             res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
+//         });
+// });
 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
     if (username === 'sonu' && password === 'sonu') {
         const token = generateToken({ username });
-        res.json({ message: 'Login successful', token });
+        res.status(200).json({ message: 'Login successful', token });
     } else {
         res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -90,7 +105,7 @@ app.put('/employees/:id', (req, res) => {
     Employee.findByIdAndUpdate(employeeId, updatedEmployee, { new: true })
         .then(employee => {
             if (employee) {
-                res.json({ message: 'Employee updated successfully', employee });
+                res.status(201).json({ message: 'Employee updated successfully', employee });
             } else {
                 res.status(404).json({ message: 'Employee not found' });
             }
@@ -105,7 +120,7 @@ app.delete('/employees/:id', (req, res) => {
     Employee.findByIdAndDelete(employeeId)
         .then(employee => {
             if (employee) {
-                res.json({ message: 'Employee deleted successfully' });
+                res.status(201).json({ message: 'Employee deleted successfully' });
             } else {
                 res.status(404).json({ message: 'Employee not found' });
             }

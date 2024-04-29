@@ -33,12 +33,10 @@ const authenticateJWT = (req, res, next) => {
     }
 };
 
-
 const generateToken = (user) => {
     const token = jwt.sign(user, secretKey, { expiresIn: '1h' });
     console.log(token); // REMOVE this line.
     return token;
 };
-
 
 export { authenticateJWT, generateToken };
