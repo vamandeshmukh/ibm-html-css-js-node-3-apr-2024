@@ -13,6 +13,7 @@ app.listen(port, () => {
 });
 
 app.get('/employees', (req, res) => {
+
     Employee.find()
         .then(employees => {
             res.json(employees);
@@ -20,6 +21,9 @@ app.get('/employees', (req, res) => {
         .catch(err => {
             res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
         });
+
+    res.send('asdf');
+
 });
 
 app.get('/employees/:id', (req, res) => {
