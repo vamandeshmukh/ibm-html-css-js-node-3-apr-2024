@@ -6,7 +6,7 @@ const authenticateJWT = (req, res, next) => {
     const bearerToken = req.headers.authorization;
     let token = '';
     if (bearerToken) {
-        token = bearerToken.split(" ")[1];
+        token = bearerToken.split(" ")[1]; // ???
         console.log(bearerToken); // REMOVE this line.
         console.log(token); // REMOVE this line.
         console.log(secretKey); // REMOVE this line.

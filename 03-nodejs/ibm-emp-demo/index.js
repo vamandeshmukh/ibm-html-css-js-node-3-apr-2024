@@ -12,15 +12,31 @@ app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
 
-app.get('/employees', (req, res) => {
-    Employee.find()
-        .then(employees => {
-            res.json(employees);
-        })
-        .catch(err => {
-            res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
-        });
-});
+// app.get('/employees', async (req, res) => {
+//     try {
+//         const page = parseInt(req.query.page) || 1;
+//         const limit = parseInt(req.query.limit) || 10;
+//         const skip = (page - 1) * limit;
+
+//         const sortField = req.query.sortBy || 'name';
+//         const sortOrder = req.query.sortOrder && req.query.sortOrder.toLowerCase() === 'desc' ? -1 : 1;
+
+//         console.log('Page:', page);
+//         console.log('Limit:', limit);
+//         console.log('Sort Field:', sortField);
+//         console.log('Sort Order:', sortOrder);
+
+//         const employees = await Employee.find()
+//             .sort({ [sortField]: sortOrder })
+//             .skip(skip)
+//             .limit(limit);
+
+//         res.json(employees);
+//     } catch (err) {
+//         console.error('Error:', err);
+//         res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
+//     }
+// });
 
 app.get('/employees/:id', (req, res) => {
     const employeeId = req.params.id;
@@ -34,6 +50,16 @@ app.get('/employees/:id', (req, res) => {
         })
         .catch(err => {
             res.status(500).json({ message: 'Failed to fetch employee', error: err.message });
+        });
+});
+
+app.get('/employees', (req, res) => {
+    Employee.find()
+        .then(employees => {
+            res.json(employees);
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
         });
 });
 
