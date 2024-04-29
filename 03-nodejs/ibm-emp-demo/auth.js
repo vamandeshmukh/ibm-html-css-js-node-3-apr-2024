@@ -28,6 +28,7 @@ const authenticateJWT = (req, res, next) => {
             }
         });
     } else {
+        console.error('No token provided');
         res.status(401).json({ message: 'No token provided' });
     }
 };
