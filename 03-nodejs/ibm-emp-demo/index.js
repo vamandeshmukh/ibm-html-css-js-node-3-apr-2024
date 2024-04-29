@@ -1,34 +1,15 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import { authenticateJWT, generateToken } from './auth.js';
+import { Employee } from './db-con.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
-const connectionString = 'mongodb://localhost:27017';
-const databaseName = 'ibm';
-
-mongoose.connect(`${connectionString}/${databaseName}`)
-    .then(() => console.log('Connected to MongoDB'))
-    .catch(err => console.error('Error connecting to MongoDB:', err));
-
-const employeeSchema = new mongoose.Schema({
-    name: String,
-    email: String,
-    salary: Number
-});
-
-const Employee = mongoose.model('Employee', employeeSchema);
 
 app.use(express.json());
+app.use(authenticateJWT);
 
-app.post('/employees', (req, res) => {
-    const newEmployee = req.body;
-    Employee.create(newEmployee)
-        .then(employee => {
-            res.status(201).json({ message: 'Employee created successfully', employee });
-        })
-        .catch(err => {
-            res.status(500).json({ message: 'Failed to create employee', error: err.message });
-        });
+app.listen(port, () => {
+    console.log(`Server is running at http://localhost:${port}`);
 });
 
 app.get('/employees', (req, res) => {
@@ -53,6 +34,27 @@ app.get('/employees/:id', (req, res) => {
         })
         .catch(err => {
             res.status(500).json({ message: 'Failed to fetch employee', error: err.message });
+        });
+});
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    if (username === 'sonu' && password === 'sonu') {
+        const token = generateToken({ username });
+        res.json({ message: 'Login successful', token });
+    } else {
+        res.status(401).json({ message: 'Invalid credentials' });
+    }
+});
+
+app.post('/employees', (req, res) => {
+    const newEmployee = req.body;
+    Employee.create(newEmployee)
+        .then(employee => {
+            res.status(201).json({ message: 'Employee created successfully', employee });
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to create employee', error: err.message });
         });
 });
 
@@ -87,6 +89,3 @@ app.delete('/employees/:id', (req, res) => {
         });
 });
 
-app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
-});
