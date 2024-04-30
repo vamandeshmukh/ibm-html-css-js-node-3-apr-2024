@@ -8,6 +8,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 const upload = multer({ dest: 'uploads/' });
 
+export { app }; // needed for running tests  
+
 app.use(express.json());
 app.use(authenticateJWT);
 
@@ -66,6 +68,7 @@ app.get('/employees/:id', (req, res) => {
 // });
 
 app.post('/login', (req, res) => {
+    console.log(req.body);
     const { username, password } = req.body;
     if (username === 'sonu' && password === 'sonu') {
         const token = generateToken({ username });
@@ -159,3 +162,4 @@ app.post('/email', (req, res) => {
             res.status(500).json({ message: error });
         })
 });
+

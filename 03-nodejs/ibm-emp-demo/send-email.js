@@ -1,5 +1,4 @@
-import nodemailer from 'nodemailer';
-
+// // basic code 
 // const transporter2 = nodemailer.createTransport({
 //     host: 'mail.gmail.com',
 //     port: 587, secure: true, service: 'Gmail',
@@ -8,15 +7,6 @@ import nodemailer from 'nodemailer';
 //     }
 // });
 
-const transporter = nodemailer.createTransport({
-    host: 'smtp.mail.yahoo.com',
-    port: 465, secure: true, service: 'yahoo',
-    auth: {
-        user: 'asdf', pass: 'lkj'
-    }
-});
-
-// // basic code 
 // const sendEmail = (mailInfo) => {
 //     console.log(mailInfo);
 //     const mailOptions = {
@@ -39,6 +29,16 @@ const transporter = nodemailer.createTransport({
 //     };
 //     transporter.sendMail(mailOptions);
 // };
+
+import nodemailer from 'nodemailer';
+
+const transporter = nodemailer.createTransport({
+    host: 'smtp.mail.yahoo.com',
+    port: 465, secure: true, service: 'yahoo',
+    auth: {
+        user: 'asdf', pass: 'lkj'
+    }
+});
 
 // code with dynamic values and proper response   
 const sendEmail = (mailProps) => {
