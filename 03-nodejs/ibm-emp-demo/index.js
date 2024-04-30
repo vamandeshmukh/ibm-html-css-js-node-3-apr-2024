@@ -1,11 +1,12 @@
 import express from 'express';
 import { authenticateJWT, generateToken } from './auth.js';
 import { Employee } from './db-con.js';
-import multer from 'multer'; // file upload 
+import multer from 'multer'; // file upload
+import { sendEmail } from './send-email.js';
 
 const app = express();
 const port = process.env.PORT || 3000;
-const upload = multer({ dest: 'uploads/' }); // // file upload 
+const upload = multer({ dest: 'uploads/' });
 
 app.use(express.json());
 app.use(authenticateJWT);
@@ -14,7 +15,7 @@ app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
 
-// request in this way - 
+// request in this way -
 // http://localhost:3000/employees?page=1&limit=2&sortBy=aadhaar
 // http://localhost:3000/employees?page=1&limit=2&sortBy=firstName$sortOrder=desc
 
@@ -85,11 +86,11 @@ app.post('/login', (req, res) => {
 //         });
 // });
 
-// upload image file 
+// upload image file
 app.post('/employees', upload.single('avatar'), async (req, res) => {
     try {
 
-        // the uploaded file  
+        // the uploaded file
         const avatar = (req.file && req.file.filename) ? req.file.filename : null;
 
         const { name, email, aadhaar, salary } = req.body;
@@ -134,4 +135,18 @@ app.delete('/employees/:id', (req, res) => {
         });
 });
 
+app.get('/email', (req, res) => {
+
+    sendEmail();
+
+    console.log('done');
+    res.send('done');
+});
+
+
+// app.post('/email', (req, res) => {
+//     // code
+//     console.log('done');
+//     res.send('done');
+// });
 
