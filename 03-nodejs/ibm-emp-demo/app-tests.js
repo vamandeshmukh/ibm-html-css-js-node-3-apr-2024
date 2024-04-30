@@ -15,12 +15,30 @@ describe('it should pass tests - ', () => {
         token = res.body.token;
     });
 
+    it('should find the status code', async () => {
+        const res = await request
+            .get('/employees')
+            .set('Authorization', `Bearer ${token}`);
+        expect(res.status).toBe(200);
+    });
+
+    // more test cases 
+
     it('should find the number of employees', async () => {
         const res = await request
             .get('/employees')
             .set('Authorization', `Bearer ${token}`);
         expect(res.status).toBe(200);
         expect(Array.isArray(res.body)).toBe(true);
+    });
+
+    it('should find the number of employees', async () => {
+        const res = await request
+            .get('/employees')
+            .set('Authorization', `Bearer ${token}`);
+        expect(res.status).toBe(200);
+        expect(res.body.length).toBe(10);
+
     });
 });
 
