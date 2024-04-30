@@ -135,18 +135,27 @@ app.delete('/employees/:id', (req, res) => {
         });
 });
 
-app.get('/email', (req, res) => {
-
-    sendEmail();
-
-    console.log('done');
-    res.send('done');
-});
-
-
-// app.post('/email', (req, res) => {
-//     // code
+// app.get('/email', (req, res) => {
+//     sendEmail();
 //     console.log('done');
 //     res.send('done');
 // });
 
+// app.post('/email', (req, res) => {
+//     sendEmail(req.body);
+//     console.log('done');
+//     res.send('done');
+// });
+
+app.post('/email', (req, res) => {
+    console.log(req.body);
+    sendEmail(req.body)
+        .then((response) => {
+            console.log(response);
+            res.status(201).json({ message: response });
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).json({ message: error });
+        })
+});
