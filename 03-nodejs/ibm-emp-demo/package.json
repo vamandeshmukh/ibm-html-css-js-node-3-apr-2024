@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "start": "node index.js",
-        "test": "jasmine app-tests.spec.js"
+        "test": "jasmine app-tests.js"
     },
     "keywords": [],
     "author": "",
