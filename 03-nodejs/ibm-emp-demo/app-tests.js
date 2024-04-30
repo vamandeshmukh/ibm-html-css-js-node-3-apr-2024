@@ -6,26 +6,22 @@ let token = '';
 
 // beforeAll(); // login here and save the token 
 
-describe('test setup', () => {
+describe('it should pass tests - ', () => {
+
     beforeAll(async () => {
         const res = await request
             .post('/login')
             .send({ username: 'sonu', password: 'sonu' });
         token = res.body.token;
     });
-});
-
-
-describe('it should pass tests - ', () => {
 
     it('should find the number of employees', async () => {
         const res = await request
-            .get('/employees');
-        console.log(res);
+            .get('/employees')
+            .set('Authorization', `Bearer ${token}`);
         expect(res.status).toBe(200);
-        expect(res.body.size).toBe(45);
+        expect(Array.isArray(res.body)).toBe(true);
     });
-
 });
 
 

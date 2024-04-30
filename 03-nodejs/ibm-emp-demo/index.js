@@ -57,15 +57,15 @@ app.get('/employees/:id', (req, res) => {
         });
 });
 
-// app.get('/employees', (req, res) => {
-//     Employee.find()
-//         .then(employees => {
-//             res.status(200).json(employees);
-//         })
-//         .catch(err => {
-//             res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
-//         });
-// });
+app.get('/employees', (req, res) => {
+    Employee.find()
+        .then(employees => {
+            res.status(200).json(employees);
+        })
+        .catch(err => {
+            res.status(500).json({ message: 'Failed to fetch employees', error: err.message });
+        });
+});
 
 app.post('/login', (req, res) => {
     console.log(req.body);
