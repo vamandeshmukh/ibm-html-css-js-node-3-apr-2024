@@ -1,16 +1,29 @@
 
-let mySalary = 10.5;
+// let mySalary = 10.5;
 
-console.log(mySalary);
+// console.log(mySalary);
 
-mySalary = 12.25;
+// mySalary = 12.25;
 
-console.log(mySalary);
+// console.log(mySalary);
 
-mySalary = 'abc';
+// mySalary = 'abc';
 
-console.log(mySalary);
+// console.log(mySalary);
 
 
-// type safety 
-// type safe 
+// // type safety 
+// // type safe 
+
+
+const myFun = (firstName, salary) => {
+    console.log(`First Name: ${firstName}`);
+    console.log(`Salary: ${salary}`);
+};
+
+// myFun();
+// myFun('Sonu');
+// myFun(10.50);
+// myFun('Sonu', 10.50);
+// myFun('Sonu', 10.50, false);
+
