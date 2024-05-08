@@ -9,7 +9,9 @@
     },
     "author": "Vaman",
     "license": "MIT",
-    "dependencies": {},
+    "dependencies": {
+         
+    },
     "devDependencies": {
         "ts-loader": "9.5.1",
         "typescript": "5.4.5",

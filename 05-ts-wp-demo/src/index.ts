@@ -1,6 +1,11 @@
 
 console.log('start');
 
+const sum: number = addNums(10, 20);
 
-// write some code 
+console.log(sum);
+
+
+
+
 
