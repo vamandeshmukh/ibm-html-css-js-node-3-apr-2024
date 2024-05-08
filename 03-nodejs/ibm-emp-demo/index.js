@@ -5,7 +5,7 @@ import multer from 'multer'; // file upload
 import { sendEmail } from './send-email.js';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 2000;
 const upload = multer({ dest: 'uploads/' });
 
 export { app }; // needed for running tests  

@@ -9,6 +9,7 @@ const authenticateJWT = (req, res, next) => {
 
     const bearerToken = req.headers.authorization;
     let token = '';
+
     if (bearerToken)
         token = bearerToken.split(" ")[1];
 
