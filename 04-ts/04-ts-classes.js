@@ -1,4 +1,3 @@
-// 04-ts-classes.ts
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
@@ -14,10 +13,12 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+// 04-ts-classes.ts
 var Person = /** @class */ (function () {
     function Person() {
+        var _this = this;
         this.printName = function () {
-            console.log('printName');
+            console.log("Person's name is ".concat(_this.firstName, "."));
         };
     }
     return Person;

@@ -1,8 +1,10 @@
 // 04-ts-classes.ts
 class Person {
 
+    firstName: string;
+
     printName = () => {
-        console.log(`Person's name is ${name}`);
+        console.log(`Person's name is ${this.firstName}.`);
     };
 }
 class Employee extends Person {
@@ -24,6 +26,18 @@ class Employee extends Person {
 const emp = new Employee(101, 'Sonu', 10.50);
 emp.printEmpData();
 emp.printName();
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
