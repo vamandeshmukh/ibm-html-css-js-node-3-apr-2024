@@ -1,3 +1,4 @@
+import { addNums } from './Calc';
 
 console.log('start');
 
